@@ -81,6 +81,7 @@ export function montarNavegacao() {
     { href: "index.html", nome: "Início" },
     { href: "ranking.html", nome: "Ranking" },
     { href: "comparar.html", nome: "Comparar cursos" },
+    { href: "sobre.html", nome: "Sobre" },
   ].forEach((item) => {
     const li = document.createElement("li");
     li.appendChild(link(item.href, item.nome));
