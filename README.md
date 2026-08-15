@@ -17,6 +17,13 @@ e pode ser recolhido pelo botão *Ocultar*.
 Há também **Ranking** (`ranking.html`) e **Comparador de cursos** (`comparar.html`), ambos no
 menu lateral. Ver [Ranking e comparação](#ranking-e-comparação).
 
+A página **Sobre** (`sobre.html`) explica o projeto, o conceito de cota e cada uma das cinco
+modalidades (Universal, Escola Pública, Escola Pública - Negros, Negros e PcD) com exemplo
+montado a partir dos próprios dados, glossário dos indicadores, perguntas frequentes e
+limitações. Em todas as páginas há um **assistente** (`assistente.js`), no botão do canto
+inferior direito, que responde perguntas sobre as cotas, os cursos, os rankings e a navegação
+usando apenas as bases do site. Ver [Sobre e assistente](#sobre-e-assistente).
+
 ## Links
 
 - Repositório: <https://github.com/mathzs7r/PlanetaDosMacacos>
@@ -39,6 +46,7 @@ menu lateral. Ver [Ranking e comparação](#ranking-e-comparação).
 ├── curso11..66.html    # páginas dos cursos da UEPG (carregam curso.js)
 ├── ranking.html        # ranking dos 12 cursos por categoria (carrega ranking.js)
 ├── comparar.html       # comparador de dois cursos (carrega comparar.js)
+├── sobre.html          # sobre o site, cotas explicadas, glossário e FAQ (carrega sobre.js)
 ├── style.css           # identidade visual (tema escuro) sobre o Bootstrap
 ├── script.js           # painel principal: estatísticas, gráfico e tabela
 ├── curso.js            # template dinâmico das páginas de curso
@@ -46,6 +54,9 @@ menu lateral. Ver [Ranking e comparação](#ranking-e-comparação).
 ├── catalogo.js         # catálogo dos 12 cursos e métricas do ranking/comparador
 ├── ranking.js          # página de ranking
 ├── comparar.js         # página de comparação
+├── sobre.js            # página Sobre: cards das cotas, exemplo real, glossário e FAQ
+├── conceitos.js        # definições das cotas, indicadores, marco legal e limitações
+├── assistente.js       # assistente de perguntas e respostas presente em todas as páginas
 ├── nav.js              # menu lateral e rodapé compartilhados
 ├── util.js             # formatadores pt-BR, paletas, estatística e tema do Chart.js
 ├── db.js               # base UEPG (export const db) — 49 cursos, 2016–2025
@@ -130,6 +141,35 @@ Limitações a considerar na leitura: as notas mínimas da UEPG e da UTFPR estã
 diferentes e não são equivalentes; os cursos da UTFPR-PG têm apenas 3 edições (2023–2025), o que
 enfraquece tendência e projeção; e os salários da UTFPR são estimativa do grupo, não fonte
 oficial.
+
+## Sobre e assistente
+
+`sobre.html` (JS em `sobre.js`) é a página de apresentação do trabalho. Ela cobre:
+
+- o que o site mede e como cada página deve ser lida;
+- **o que é uma cota** e o que cada modalidade exige — inclusive a diferença entre `Negros`
+  (recorte racial) e `Escola Pública - Negros` (escola pública **e** autodeclaração de negro);
+- um **exemplo com dados reais**: todas as cotas de um mesmo curso e ano lado a lado, mostrando
+  por que o mesmo curso tem concorrência e nota de corte diferentes em cada lista;
+- de onde vêm as regras (Lei nº 12.711/2012 e alterações, para a UTFPR; resolução própria da
+  UEPG, publicada em cada edital);
+- glossário dos indicadores, perguntas frequentes e limitações da leitura.
+
+Os textos conceituais ficam em `conceitos.js`, reaproveitados pelo assistente — não há definição
+duplicada entre a página e o chat.
+
+`assistente.js` monta um chat flutuante em todas as páginas. Ele roda no navegador, sem serviço
+externo nem chave de API: interpreta a pergunta (normalização de acentos + termos-chave) e monta a
+resposta a partir de `db.js`, `db_utfpr.js`, `catalogo.js` e `conceitos.js`. Responde, por exemplo:
+
+- `o que é a cota universal?` / `diferença entre negros e escola pública - negros`
+- `concorrência de Medicina em 2025` / `Administração 2019 escola pública`
+- `qual curso é o mais concorrido?`, `qual paga mais?`, `qual é mais curto?`, `qual é mais estável?`
+- `qual cota de Medicina tem menos concorrência?`
+- `o que é nota de corte?`, `como comparar dois cursos?`, `de onde vêm os dados?`
+
+Quando a pergunta não tem resposta nas bases, o assistente diz isso e sugere o que sabe responder,
+em vez de estimar um número.
 
 ## Fontes dos dados
 
